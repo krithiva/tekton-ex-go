@@ -1,0 +1,91 @@
+Step: build-step-credential-initializer-q99v4:
+
+{"level":"warn","ts":1556279467.2839353,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1556279467.2897527,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-********-environment-fishpinto-jpj4r:
+
+{"level":"warn","ts":1556279468.804779,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1556279469.1651828,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/********/environment-fishpinto-staging\" @ \"v0.0.1\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-04-26T11:51:11Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:3b768a60961e98a44eea9568945dbdcc3f54907d
+time="2019-04-26T11:51:11Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-setup-**-git-credentials:
+
+Generated Git credentials file /builder/home/git/credentials
+Step: build-step-build-helm-apply:
+
+Modified file /workspace/source/env/Chart.yaml to set the chart to version 2
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: chartmuseum.jenkins-x.io http://chartmuseum.jenkins-x.io
+Successfully added Helm repository chartmuseum.jenkins-x.io.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository jenkins-x-chartmuseum.
+Applying helm chart at . as release name ** to namespace **-staging
+Ignoring templates/.gitignore
+Wrote chart values.yaml values.yaml generated from directory tree
+generated helm values.yaml
+
+PipelineSecrets: {}
+cleanup:
+  Annotations:
+    helm.sh/hook: pre-delete
+    helm.sh/hook-delete-policy: hook-succeeded
+  Args:
+  - --cleanup
+controllerbuild:
+  enabled: true
+expose:
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+  Args:
+  - --v
+  - 4
+  config:
+    domain: 35.239.97.222.nip.io
+    exposer: Ingress
+    http: "true"
+jenkins:
+  Servers:
+    Global:
+      EnvVars:
+        TILLER_NAMESPACE: kube-system
+  enabled: false
+prow: {}
+
+
+Using values files: values.yaml
+Applying chart overrides
+Deleting and cloning the Jenkins X versions repo
+Cloning the Jenkins X versions repo https://github.com/jenkins-x/jenkins-x-versions.git with ref refs/heads/master to /builder/home/.**/jenkins-x-versions
+Enumerating objects: 1119, done.
+Total 1119 (delta 0), reused 0 (delta 0), pack-reused 1119
+WARNING: could not find a stable version from charts of . from /builder/home/.**/jenkins-x-versions
+For background see: https://jenkins-x.io/architecture/version-stream/
+Please lock this version down via the command: ** step create version pr -k charts -n .
+
+Applying generated chart . YAML via kubectl in dir: /tmp/helm-template-workdir-396463936/**/output
+role.rbac.authorization.k8s.io/cleanup created
+rolebinding.rbac.authorization.k8s.io/cleanup created
+serviceaccount/cleanup created
+configmap/exposecontroller created
+role.rbac.authorization.k8s.io/expose created
+rolebinding.rbac.authorization.k8s.io/expose created
+serviceaccount/expose created
+deployment.extensions/**-tekton-ex-go created
+release.jenkins.io/tekton-ex-go-0.0.1 created
+service/tekton-ex-go created
+
+Applying Helm hook post-upgrade YAML via kubectl in file: /tmp/helm-template-workdir-396463936/**/helmHooks/env/charts/expose/templates/job.yaml
+job.batch/expose created
+
+Waiting for helm post-upgrade hook Job expose to complete before removing it
+Deleting helm hook sources from file: /tmp/helm-template-workdir-396463936/**/helmHooks/env/charts/expose/templates/job.yaml
+job.batch "expose" deleted
+Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=**,jenkins.io/version!=2 from all pvc configmap release sa role rolebinding secret
+Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=**,jenkins.io/version!=2,jenkins.io/namespace=**-staging from clusterrole clusterrolebinding
