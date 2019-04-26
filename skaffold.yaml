@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/krithiva/tekton-ex-go:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/krithiva/tekton-ex-go:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: tekton-ex-go
+        chartPath: charts/tekton-ex-go
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/krithiva/tekton-ex-go'
+          image.tag: '{{.DIGEST_HEX}}'
