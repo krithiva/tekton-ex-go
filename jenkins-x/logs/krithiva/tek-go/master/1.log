@@ -1,0 +1,79 @@
+Step: build-step-credential-initializer-x5mbm:
+
+{"level":"warn","ts":1556280529.871852,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1556280529.8727384,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-********-tek-go-master-d58qj:
+
+{"level":"warn","ts":1556280531.3601995,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1556280531.6673253,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/********/tek-go\" @ \"v0.0.1\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-04-26T12:08:53Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:
+time="2019-04-26T12:08:53Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-setup-**-git-credentials:
+
+Generated Git credentials file /workspace/xdg_config/git/credentials
+Step: build-step-build-make-build:
+
+CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build -ldflags '' -o bin/tek-go main.go
+Step: build-step-build-container-build:
+
+[36mINFO[0m[0000] No base image, nothing to extract            
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] Skipping unpacking as no commands require it. 
+[36mINFO[0m[0000] Taking snapshot of full filesystem...        
+[36mINFO[0m[0000] EXPOSE 8080                                  
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] ENTRYPOINT ["/tek-go"]                       
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] COPY ./bin/ /                                
+[36mINFO[0m[0000] Taking snapshot of files...                  
+ERROR: logging before flag.Parse: E0426 12:09:04.179425      13 metadata.go:142] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+ERROR: logging before flag.Parse: E0426 12:09:04.182498      13 metadata.go:159] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+2019/04/26 12:09:04 pushed blob: sha256:a4d1a0005ac1dccfe4d6a47538d217e9ae89e40121f90ca91fe7dad51e4a7bd5
+2019/04/26 12:09:04 pushed blob: sha256:096c9c77b2defd2d0b854d0f1ebf99c2e0b37d2f33cbcd22bd7934cf97ab6ecc
+2019/04/26 12:09:04 10.51.246.142:5000/********/tek-go:0.0.1: digest: sha256:42307ffe63f733cc6248db1cce6a244780bce68f41742151b43b564623541ad7 size: 428
+Step: build-step-build-post-build:
+
+no CVE provider running in the current ** namespace so skip adding image to be analysed
+Step: build-step-promote-changelog:
+
+Converted /workspace/source/charts/tek-go to an unshallow repository
+Generating change log from git ref 527cb80884428bd33d9dae33a402863c7f548056 => dd8a7cc559434ddb7104ca174dbbf774647fd4ed
+WARNING: Failed to enrich commits with issues: User.jenkins.io "" is invalid: metadata.name: Required value: name or generateName is required
+WARNING: Failed to enrich commits with issues: User.jenkins.io "" is invalid: metadata.name: Required value: name or generateName is required
+Finding issues in commit messages using git format
+WARNING: No release found for ********/tek-go and tag v0.0.1 so creating a new release
+Updated the release information at https://github.com/********/tek-go/releases/tag/v0.0.1
+generated: /workspace/source/charts/tek-go/templates/release.yaml
+Created Release tek-go-0-0-1 resource in namespace **
+Updating PipelineActivity ********-tek-go-master-1 with version 0.0.1
+Updated PipelineActivities ********-tek-go-master-1 with release notes URL: https://github.com/********/tek-go/releases/tag/v0.0.1
+Step: build-step-promote-helm-release:
+
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: chartmuseum.jenkins-x.io http://chartmuseum.jenkins-x.io
+Successfully added Helm repository chartmuseum.jenkins-x.io.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Uploading chart file tek-go-0.0.1.tgz to http://jenkins-x-chartmuseum:8080/api/charts
+Received 201 response: {"saved":true}
+Step: build-step-promote-**-promote:
+
+WARNING: prow based install so skip waiting for the merge of Pull Requests to go green as currently there is an issue with gettingstatuses from the PR, see https://github.com/jenkins-x/**/issues/2410
+Promoting app tek-go version 0.0.1 to namespace **-staging
+Created Pull Request: https://github.com/********/environment-fishpinto-staging/pull/2
+
+Pull Request https://github.com/********/environment-fishpinto-staging/pull/2 is merged at sha 525fbf17bd0efb97787ed6a0c9a67df7d591ae4a
+Pull Request merged but we are not waiting for the update pipeline to complete!
+WARNING: Could not find the service URL in namespace **-staging for names tek-go, **-tek-go, **-staging-tek-go
