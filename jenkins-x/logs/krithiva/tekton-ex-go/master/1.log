@@ -1,0 +1,79 @@
+Step: build-step-credential-initializer-857n6:
+
+{"level":"warn","ts":1556279343.4000638,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1556279343.4015646,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-********-tekton-ex-go-master-ndx84:
+
+{"level":"warn","ts":1556279345.155657,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1556279345.6910079,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/********/tekton-ex-go\" @ \"v0.0.1\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-04-26T11:50:21Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:
+time="2019-04-26T11:50:21Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-setup-**-git-credentials:
+
+Generated Git credentials file /workspace/xdg_config/git/credentials
+Step: build-step-build-make-build:
+
+CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build -ldflags '' -o bin/tekton-ex-go main.go
+Step: build-step-build-container-build:
+
+[36mINFO[0m[0000] No base image, nothing to extract            
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] Skipping unpacking as no commands require it. 
+[36mINFO[0m[0000] Taking snapshot of full filesystem...        
+[36mINFO[0m[0000] EXPOSE 8080                                  
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] ENTRYPOINT ["/tekton-ex-go"]                 
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] COPY ./bin/ /                                
+[36mINFO[0m[0000] Taking snapshot of files...                  
+ERROR: logging before flag.Parse: E0426 11:50:33.248122       9 metadata.go:142] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+ERROR: logging before flag.Parse: E0426 11:50:33.253326       9 metadata.go:159] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+2019/04/26 11:50:33 pushed blob: sha256:12a37253aa7a22507d31c6505a55b2f10ad9d6a6727c489b0f3392481a90a968
+2019/04/26 11:50:33 pushed blob: sha256:bb641df3bc8d53d91d51b940b8f853ff6d40f6220bd9a7435c30b4b464bca3ef
+2019/04/26 11:50:33 10.51.246.142:5000/********/tekton-ex-go:0.0.1: digest: sha256:77bf0e1ce3ac227de506b5de763a7f24b265ac50fac10caf820c30685820af2e size: 428
+Step: build-step-build-post-build:
+
+no CVE provider running in the current ** namespace so skip adding image to be analysed
+Step: build-step-promote-changelog:
+
+Converted /workspace/source/charts/tekton-ex-go to an unshallow repository
+Generating change log from git ref 95579a9196f9c2a251893d0c113ed5800aa59ce6 => 9a5c1eac9f630f18e1a917a4bbfae095e87d0fa7
+WARNING: Failed to enrich commits with issues: User.jenkins.io "" is invalid: metadata.name: Required value: name or generateName is required
+WARNING: Failed to enrich commits with issues: User.jenkins.io "" is invalid: metadata.name: Required value: name or generateName is required
+Finding issues in commit messages using git format
+WARNING: No release found for ********/tekton-ex-go and tag v0.0.1 so creating a new release
+Updated the release information at https://github.com/********/tekton-ex-go/releases/tag/v0.0.1
+generated: /workspace/source/charts/tekton-ex-go/templates/release.yaml
+Created Release tekton-ex-go-0-0-1 resource in namespace **
+Updating PipelineActivity ********-tekton-ex-go-master-1 with version 0.0.1
+Updated PipelineActivities ********-tekton-ex-go-master-1 with release notes URL: https://github.com/********/tekton-ex-go/releases/tag/v0.0.1
+Step: build-step-promote-helm-release:
+
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: chartmuseum.jenkins-x.io http://chartmuseum.jenkins-x.io
+Successfully added Helm repository chartmuseum.jenkins-x.io.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Uploading chart file tekton-ex-go-0.0.1.tgz to http://jenkins-x-chartmuseum:8080/api/charts
+Received 201 response: {"saved":true}
+Step: build-step-promote-**-promote:
+
+WARNING: prow based install so skip waiting for the merge of Pull Requests to go green as currently there is an issue with gettingstatuses from the PR, see https://github.com/jenkins-x/**/issues/2410
+Promoting app tekton-ex-go version 0.0.1 to namespace **-staging
+Created Pull Request: https://github.com/********/environment-fishpinto-staging/pull/1
+
+Pull Request https://github.com/********/environment-fishpinto-staging/pull/1 is merged at sha 3b768a60961e98a44eea9568945dbdcc3f54907d
+Pull Request merged but we are not waiting for the update pipeline to complete!
+WARNING: Could not find the service URL in namespace **-staging for names tekton-ex-go, **-tekton-ex-go, **-staging-tekton-ex-go
